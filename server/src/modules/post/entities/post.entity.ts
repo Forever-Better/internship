@@ -18,10 +18,7 @@ export class Post {
   id: number;
 
   @Column()
-  title: string;
-
-  @Column()
-  cover: string;
+  image: string;
 
   @Column()
   body: string;

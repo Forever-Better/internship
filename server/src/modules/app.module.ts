@@ -15,6 +15,7 @@ import { FollowerModule } from './follower/follower.module';
 import { LikeModule } from './like/like.module';
 import { PostModule } from './post/post.module';
 import { FileModule } from './file/file.module';
+import { MessageModule } from './message/message.module';
 
 @Module({
   imports: [
@@ -34,6 +35,7 @@ import { FileModule } from './file/file.module';
     FileModule,
     FollowerModule,
     LikeModule,
+    MessageModule,
     PostModule,
     UserModule,
   ],

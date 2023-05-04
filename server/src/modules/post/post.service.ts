@@ -15,8 +15,7 @@ export class PostService {
   create(userId: number, createPostDto: CreatePostDto) {
     return this.repository.save({
       user: { id: userId },
-      title: createPostDto.title,
-      cover: createPostDto.cover,
+      image: createPostDto.image,
       body: createPostDto.body,
     });
   }
@@ -54,8 +53,7 @@ export class PostService {
     if (userId !== find.user.id) throw new ForbiddenException('Пост принадлежит другому пользователю.');
 
     this.repository.update(postId, {
-      title: updatePostDto.title,
-      cover: updatePostDto.cover,
+      image: updatePostDto.image,
       body: updatePostDto.body,
     });
 
