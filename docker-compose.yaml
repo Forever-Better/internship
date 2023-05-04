@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+  postgres:
+    container_name: postgres_database
+    image: postgres:alpine
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    env_file: .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      net:
+        ipv4_address: 172.16.0.2
+
+  # server:
+  #   container_name: server
+  #   restart: unless-stopped
+  #   build:
+  #     context: server
+  #   ports:
+  #     - '5000:5000'
+  #   depends_on:
+  #     - postgres
+  #   volumes:
+  #     - media:/usr/src/server/media
+  #   networks:
+  #     net:
+  #       ipv4_address: 172.18.0.1
+
+volumes:
+  pgdata:
+  media:
+
+networks:
+  net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.16.0.0/23
+    driver_opts:
+      com.docker.network.bridge.name: common-bridge2
