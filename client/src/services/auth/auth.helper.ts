@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 
+import type { AuthResponse } from '@/store/user/user.interface';
 import { Tokens as TokensEnum } from '@/types/enums';
 import type { Tokens } from '@/types/tokens.interface';
 
@@ -28,7 +29,7 @@ export const removeFromStorage = () => {
   localStorage.removeItem('user');
 };
 
-export const saveToStorage = (data: SignupMutation['signup']) => {
+export const saveToStorage = (data: AuthResponse) => {
   saveTokensStorage(data);
   localStorage.setItem('user', JSON.stringify(data.user));
 };

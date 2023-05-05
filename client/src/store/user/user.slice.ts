@@ -4,7 +4,7 @@ import { getLocalStorage } from '@/helpers/getLocalStorage';
 import { removeFromStorage, saveToStorage } from '@/services/auth/auth.helper';
 import { authApi } from '@/services/auth/auth.service';
 
-import type { InitialState } from './user.interface';
+import type { AuthResponse, InitialState } from './user.interface';
 
 const initialState: InitialState = {
   user: getLocalStorage('user'),
@@ -28,14 +28,14 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }: { payload: any }) => {
+      .addMatcher(authApi.endpoints.login.matchFulfilled, (state, { payload }: { payload: AuthResponse }) => {
         state.user = payload.user;
         saveToStorage(payload);
       })
       .addMatcher(authApi.endpoints.signup.matchPending, (state) => {
         state.isLoading = true;
       })
-      .addMatcher(authApi.endpoints.signup.matchFulfilled, (state, { payload }: { payload: any }) => {
+      .addMatcher(authApi.endpoints.signup.matchFulfilled, (state, { payload }: { payload: AuthResponse }) => {
         state.user = payload.user;
         saveToStorage(payload);
         state.isLoading = false;
@@ -46,7 +46,7 @@ export const userSlice = createSlice({
       .addMatcher(authApi.endpoints.getNewTokens.matchPending, (state) => {
         state.isLoading = true;
       })
-      .addMatcher(authApi.endpoints.getNewTokens.matchFulfilled, (state, { payload }: { payload: any }) => {
+      .addMatcher(authApi.endpoints.getNewTokens.matchFulfilled, (state, { payload }: { payload: AuthResponse }) => {
         state.user = payload.user;
         saveToStorage(payload);
         state.isLoading = false;

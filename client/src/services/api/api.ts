@@ -7,7 +7,7 @@ import { getApiUrl } from '@/helpers/getApiUrl';
 import { getAccessToken } from '../auth/auth.helper';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: process.env.SERVER_URL,
+  baseUrl: import.meta.env.VITE_SERVER_URL,
   credentials: 'include',
   prepareHeaders: (headers) => {
     const isRefreshtokenExist = headers.get('authorization');
@@ -48,6 +48,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 export const api = createApi({
   reducerPath: 'splitApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['Posts', 'Auth', 'User'],
+  tagTypes: ['Post', 'Auth', 'User'],
   endpoints: () => ({})
 });

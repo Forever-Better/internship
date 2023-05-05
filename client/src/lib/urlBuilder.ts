@@ -1,6 +1,7 @@
 export enum UrlTemplates {
   Main = '/',
-  Profile = '/@:username',
-  Login = '/login',
+  Feed = '/feed',
+  Profile = '/users',
+  Login = '/',
   Signup = '/signup'
 }

@@ -1,0 +1,36 @@
+* {
+  &:not(svg) {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+html {
+  font-family: -apple-system, system-ui, 'Helvetica Neue', Roboto, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: var(--md-sys-color-on-surface);
+  background-color: var(--md-sys-color-surface);
+  transition: background-color 0.15s, color 0.25s;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+html,
+body,
+#root,
+.container {
+  height: 100%;
+}
+
+button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}

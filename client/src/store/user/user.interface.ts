@@ -1,5 +1,3 @@
-import type { User } from '@/types/user.interface';
-
 export interface UserState {
   id: string | number;
   email: string;
@@ -31,5 +29,5 @@ export interface SignupData {
 }
 
 export interface AuthResponse extends Tokens {
-  user: User;
+  user: UserState;
 }

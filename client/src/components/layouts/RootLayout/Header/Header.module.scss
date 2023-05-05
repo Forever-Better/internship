@@ -1,0 +1,31 @@
+.root {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 52px;
+  background-color: var(--md-sys-color-surface-variant);
+  color: var(--md-sys-color-on-surface-variant);
+
+  .content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--md-sys-color-on-surface);
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+}

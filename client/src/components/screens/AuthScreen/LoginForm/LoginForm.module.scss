@@ -1,0 +1,33 @@
+@use '@/styles/util/' as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+
+  .form {
+    .content {
+      margin-bottom: 24px;
+
+      .instructions {
+        line-height: 32px;
+
+        a {
+          color: var(--md-sys-color-primary);
+        }
+      }
+
+      .fields {
+        display: flex;
+        flex-direction: column;
+        margin-top: 32px;
+      }
+    }
+
+    .submit {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
