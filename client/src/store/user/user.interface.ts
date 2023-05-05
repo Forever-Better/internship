@@ -1,5 +1,5 @@
 export interface UserState {
-  id: string | number;
+  id: number;
   email: string;
   firstName: string;
   lastName: string;

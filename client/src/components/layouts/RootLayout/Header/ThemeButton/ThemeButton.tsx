@@ -1,4 +1,4 @@
-import { Icon24SunOutline, Icon24Moon } from '@vkontakte/icons';
+import { Icon24SunOutline, Icon24Moon, Icon28MoonOutline } from '@vkontakte/icons';
 import { IconButton } from '@vkontakte/vkui';
 import { useTheme } from 'next-themes';
 import { useCallback } from 'react';
@@ -19,11 +19,11 @@ const ThemeButton: React.FC = () => {
   }, [theme, systemTheme]);
 
   const getIcon = useCallback(() => {
-    if (theme === ThemeMode.LIGHT) return <Icon24Moon />;
+    if (theme === ThemeMode.LIGHT) return <Icon28MoonOutline width={24} />;
     if (theme === ThemeMode.DARK) return <Icon24SunOutline />;
     if (theme === ThemeMode.SYSTEM) {
       if (systemTheme === ThemeMode.LIGHT) return <Icon24Moon />;
-      if (systemTheme === ThemeMode.DARK) return <Icon24SunOutline />;
+      if (systemTheme === ThemeMode.DARK) return <Icon28MoonOutline width={24} />;
     }
     return null;
   }, [theme, systemTheme]);

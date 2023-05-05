@@ -1,11 +1,12 @@
-import { Icon32LogoVkColor, Icon28DoorArrowRightOutline, Icon28User } from '@vkontakte/icons';
+import { Icon28DoorArrowRightOutline, Icon28User } from '@vkontakte/icons';
 import { Avatar, IconButton } from '@vkontakte/vkui';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { getPublicUrl } from '@/helpers/getPublicUrl';
 import { useActions } from '@/hooks/useActions';
 import { useAuth } from '@/hooks/useAuth';
 
+import Brand from './Brand/Brand';
 import styles from './Header.module.scss';
 import ThemeButton from './ThemeButton/ThemeButton';
 
@@ -19,10 +20,9 @@ const Header = () => {
       <div className='container'>
         <div className={styles.content}>
           <div className={styles.left}>
-            <div className={styles.brand}>
-              <Icon32LogoVkColor />
-              <span className={styles.label}>Internship</span>
-            </div>
+            <Link to={getPublicUrl.feed()}>
+              <Brand />
+            </Link>
           </div>
           <div className={styles.right}>
             <ThemeButton />

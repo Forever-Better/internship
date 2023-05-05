@@ -6,6 +6,7 @@ import { getPublicUrl } from '@/helpers/getPublicUrl';
 import { useLoginMutation } from '@/services/auth/auth.service';
 import type { LoginFormFields } from '@/types/login-form-fields.interface';
 
+import Brand from '../Brand/Brand';
 import EmailField from '../Fields/EmailField';
 import PasswordField from '../Fields/PasswordField';
 
@@ -28,24 +29,20 @@ const LoginForm = () => {
 
   return (
     <div className={styles.root}>
-      <h1 className='font-medium'>Войти</h1>{' '}
+      <Brand />
       <form className={styles.form} onSubmit={onSubmit}>
-        <div className={styles.content}>
-          <p className={styles.instructions}>
-            Новый пользователь? <Link to={getPublicUrl.signup()}>Создать учетную запись</Link>
-          </p>
-          <div className={styles.fields}>
-            <EmailField control={control} disabled={isLoading} name='email' strict={false} />
-            <PasswordField control={control} disabled={isLoading} name='password' strict={false} />
-          </div>
-          {error && <FormStatus mode='error'>Неверные данные для входа.</FormStatus>}
+        <div className={styles.fields}>
+          <EmailField control={control} disabled={isLoading} name='email' strict={false} />
+          <PasswordField control={control} disabled={isLoading} name='password' strict={false} />
         </div>
-        <div className={styles.submit}>
-          <Button disabled={isLoading} loading={isLoading} size='m' type='submit'>
-            Войти
-          </Button>
-        </div>
+        {error && <FormStatus mode='error'>Неверные данные для входа.</FormStatus>}
+        <Button stretched disabled={isLoading} loading={isLoading} size='l' type='submit'>
+          Войти
+        </Button>
       </form>
+      <p className={styles.instructions}>
+        <span>Новый пользователь?</span> <Link to={getPublicUrl.signup()}>Создать учетную запись</Link>
+      </p>
     </div>
   );
 };

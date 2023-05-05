@@ -11,6 +11,9 @@ export const getPublicUrl = {
     return UrlTemplates.Feed;
   },
   profile(userId: number) {
-    return `${UrlTemplates.Profile}/${userId}`;
+    return `${UrlTemplates.Users}/${userId}`;
+  },
+  dialogues() {
+    return UrlTemplates.Dialogues;
   }
 };
