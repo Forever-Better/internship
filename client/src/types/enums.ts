@@ -8,3 +8,8 @@ export enum ThemeMode {
   LIGHT = 'light',
   DARK = 'dark'
 }
+
+// export enum PostItemMode: {
+//   OWNER: 'owner',
+
+// }

@@ -1,5 +1,10 @@
+@use '@/styles/util' as *;
+
 .root {
-  display: flex;
-  gap: 32px;
-  padding: 12px 0;
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+  gap: 16px;
+  @include breakpoint-down(lg) {
+    grid-template-columns: 1fr;
+  }
 }

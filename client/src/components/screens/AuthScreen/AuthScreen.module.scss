@@ -2,57 +2,38 @@
 
 .root {
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: var(--md-sys-color-surface-variant);
+  overflow: hidden;
 
-  .inner {
-    display: flex;
-    flex-direction: column;
+  .content {
+    display: grid;
+    grid-template-columns: 6fr 4fr;
     justify-content: center;
     align-items: center;
     height: 100%;
     gap: 24px;
 
-    .logoAndText {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 16px;
-      text-align: left;
-      align-items: flex-start;
-      color: var(--md-sys-color-on-surface);
-      @include breakpoint(xl) {
-        display: flex;
-      }
-
-      p {
-        font-size: 20px;
-      }
+    .imageContainer {
+      height: 100%;
+      background-size: cover;
+      background-position-x: 20%;
+      filter: brightness(0.9);
     }
 
-    .panel {
+    .authContainer {
       display: flex;
-      flex-direction: column;
-      width: 360px;
-      padding: 32px;
-      border-radius: 12px;
-      background-color: var(--md-sys-color-surface);
-      @include breakpoint-down(sm) {
-        width: 100%;
-        height: 100%;
-        padding: 24px;
-        border-radius: unset;
-      }
-
-      .brand {
-        display: none;
+      justify-content: center;
+      .panel {
+        display: flex;
+        flex-direction: column;
+        width: 360px;
+        padding: 32px;
+        border-radius: 12px;
+        background-color: var(--md-sys-color-surface);
         @include breakpoint-down(sm) {
-          display: flex;
-          align-items: center;
-          gap: 8px;
-          margin-bottom: 12px;
-          font-weight: 500;
+          width: 100%;
+          height: 100%;
+          padding: 24px;
+          border-radius: unset;
         }
       }
     }

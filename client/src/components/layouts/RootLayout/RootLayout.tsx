@@ -9,8 +9,10 @@ import styles from './RootLayout.module.scss';
 const RootLayout: React.FC = () => (
   <OnlyUserOutlet>
     <Header />
-    <div className={styles.root}>
-      <div className='container'>
+
+    <div className='container'>
+      {' '}
+      <div className={styles.root}>
         <aside>
           <NavigationRail />
         </aside>

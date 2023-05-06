@@ -1,5 +1,8 @@
+@use '@/styles/util' as *;
+
 .root {
-  max-width: 180px;
-  .list {
+  margin-top: 16px;
+  @include breakpoint-down(lg) {
+    display: none;
   }
 }

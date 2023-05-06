@@ -1,0 +1,49 @@
+.root {
+  .header {
+    display: flex;
+    flex-direction: column;
+
+    .top {
+      display: flex;
+      gap: 12px;
+    }
+
+    .textarea {
+      width: 100%;
+      background-color: transparent;
+    }
+
+    .imageContainer {
+      position: relative;
+      overflow: hidden;
+
+      &.isExist {
+        margin-top: 24px;
+      }
+
+      .image {
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+      }
+
+      .deleteButton {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        z-index: 1;
+      }
+    }
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

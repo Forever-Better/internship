@@ -1,0 +1,33 @@
+.auth-form-root {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .auth-form {
+    .auth-form-fields {
+      margin-bottom: 12px;
+    }
+
+    &-instruction {
+      text-align: center;
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 500;
+      color: var(--md-sys-color-on-surface-variant);
+
+      a {
+        color: var(--md-sys-color-primary);
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    &-create-button-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+  }
+}

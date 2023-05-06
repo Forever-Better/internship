@@ -1,4 +1,5 @@
-import { Button, FormStatus } from '@vkontakte/vkui';
+import { Icon20ArrowRightOutline } from '@vkontakte/icons';
+import { Button, FormStatus, Separator, Spacing } from '@vkontakte/vkui';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -9,8 +10,6 @@ import type { LoginFormFields } from '@/types/login-form-fields.interface';
 import Brand from '../Brand/Brand';
 import EmailField from '../Fields/EmailField';
 import PasswordField from '../Fields/PasswordField';
-
-import styles from './LoginForm.module.scss';
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -28,10 +27,10 @@ const LoginForm = () => {
   });
 
   return (
-    <div className={styles.root}>
+    <div className='auth-form-root'>
       <Brand />
-      <form className={styles.form} onSubmit={onSubmit}>
-        <div className={styles.fields}>
+      <form className='auth-form' onSubmit={onSubmit}>
+        <div className='auth-form-fields'>
           <EmailField control={control} disabled={isLoading} name='email' strict={false} />
           <PasswordField control={control} disabled={isLoading} name='password' strict={false} />
         </div>
@@ -40,9 +39,19 @@ const LoginForm = () => {
           Войти
         </Button>
       </form>
-      <p className={styles.instructions}>
-        <span>Новый пользователь?</span> <Link to={getPublicUrl.signup()}>Создать учетную запись</Link>
-      </p>
+      <Spacing size={12}>
+        <Separator />
+      </Spacing>
+      <Button
+        appearance='positive'
+        className='auth-form-create-button'
+        size='l'
+        onClick={() => navigate(getPublicUrl.signup())}
+      >
+        <div className='auth-form-create-button-label'>
+          Создать аккаунт <Icon20ArrowRightOutline />
+        </div>
+      </Button>
     </div>
   );
 };

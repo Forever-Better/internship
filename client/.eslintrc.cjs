@@ -69,6 +69,7 @@ module.exports = {
       }
     ],
     'react/no-array-index-key': 0,
+    'consistent-return': 'off',
     'no-param-reassign': 0,
     // 'sort-keys': [1, 'asc', { natural: true, allowLineSeparatedGroups: true }],
     'sort-destructure-keys/sort-destructure-keys': [2, { caseSensitive: false }],

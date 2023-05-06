@@ -36,7 +36,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <Provider store={store}>
       <AuthProvider>
         <ThemeProvider defaultTheme='system'>
-          <ConfigProvider>
+          <ConfigProvider appearance='dark'>
             <AdaptivityProvider>
               <AppRoot mode='partial'>
                 {' '}

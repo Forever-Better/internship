@@ -28,10 +28,9 @@ export class UserService {
       .where({ id })
       .leftJoinAndSelect('users.following', 'following')
       .leftJoinAndSelect('users.followers', 'followers')
-      .leftJoinAndSelect('users.articles', 'articles')
-      .leftJoinAndSelect('users.bookmarks', 'bookmarks')
+      .leftJoinAndSelect('users.posts', 'posts.users')
+
       .leftJoinAndSelect('users.likes', 'likes')
-      .leftJoinAndSelect('users.drafts', 'drafts')
       .getOne()
       .then((a) => ({ ...a, followersCount: a.followers.length }));
 

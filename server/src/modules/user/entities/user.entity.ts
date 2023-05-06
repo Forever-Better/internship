@@ -23,6 +23,15 @@ export class User {
   @Column({ nullable: true })
   image: string;
 
+  @Column({ default: 23 })
+  age: number;
+
+  @Column({ default: 'Velikiy Novgorod' })
+  city: string;
+
+  @Column({ default: 'University of Yaroslav the Wise' })
+  university: string;
+
   @CreateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP',

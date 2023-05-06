@@ -232,7 +232,7 @@
   --vkui--color_background_contrast_inverse: #2c2d2e;
   --vkui--color_background_contrast_inverse--hover: #2a2c2f;
   --vkui--color_background_contrast_inverse--active: #282b2f;
-  --vkui--color_background_modal: #ffffff;
+  --vkui--color_background_modal: var(--md-sys-color-surface-variant);
   --vkui--color_background_modal--hover: #f5f5f7;
   --vkui--color_background_modal--active: #ebecef;
   --vkui--color_background_modal_inverse: #2d2d2e;
@@ -265,7 +265,7 @@
   --vkui--color_text_accent_themed: #2688eb;
   --vkui--color_text_accent_themed--hover: #2483e4;
   --vkui--color_text_accent_themed--active: #237edd;
-  --vkui--color_text_primary: #000000;
+  --vkui--color_text_primary: var(--md-sys-color-on-surface);
   --vkui--color_text_primary--hover: #000102;
   --vkui--color_text_primary--active: #000105;
   --vkui--color_text_primary_invariably: #000000;

@@ -8,7 +8,7 @@ export interface User {
   image: string;
   createdAt: Date;
   updatedAt: Date;
-  post: Post[];
+  posts: Post[];
   likes: Post[];
   following: User[];
   followers: User[];

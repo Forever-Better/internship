@@ -1,40 +1,48 @@
-import { Button } from '@vkontakte/vkui';
+import { Icon20ArrowLeftOutline } from '@vkontakte/icons';
+import { Button, Separator, Spacing } from '@vkontakte/vkui';
 import { useFormContext } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { getPublicUrl } from '@/helpers/getPublicUrl';
 import type { SignupFormFields } from '@/types/signup-form-fields.interface';
 
+import Brand from '../../Brand/Brand';
 import EmailField from '../../Fields/EmailField';
 import PasswordField from '../../Fields/PasswordField';
 
-import styles from './StepOne.module.scss';
-
 const StepOne: React.FC<{ setStep: React.Dispatch<React.SetStateAction<number>> }> = ({ setStep }) => {
+  const navigate = useNavigate();
   const {
     control,
     formState: { isValid }
   } = useFormContext<SignupFormFields>();
 
   return (
-    <div className={styles.root}>
-      <div className={styles.instructions}>
-        <p className={styles.withEmail}>С помощью электронной почты</p>
-        <p>
-          Уже есть учетная запись? <Link to={getPublicUrl.login()}>Войти</Link>
-        </p>
-      </div>
-      <form className={styles.emailForm}>
-        <div className={styles.fields}>
+    <div className='auth-form-root'>
+      <Brand />
+      <form className='auth-form'>
+        <div className='auth-form-fields'>
           <EmailField control={control} name='email' />
           <PasswordField control={control} name='password' />
         </div>
-        <section className={styles.submit}>
-          <Button disabled={!isValid} size='m' onClick={() => setStep(2)}>
-            Продолжить
-          </Button>
-        </section>
+        <Button stretched disabled={!isValid} size='l' onClick={() => setStep(2)}>
+          Продолжить
+        </Button>
       </form>
+      <Spacing size={12}>
+        <Separator />
+      </Spacing>
+      <Button
+        appearance='neutral'
+        className='auth-form-create-button'
+        size='l'
+        onClick={() => navigate(getPublicUrl.login())}
+      >
+        <div className='auth-form-create-button-label'>
+          <Icon20ArrowLeftOutline />
+          Войти
+        </div>
+      </Button>
     </div>
   );
 };
