@@ -1,18 +1,25 @@
-import clsx from 'clsx';
-
 import PostItem from '@/components/PostItem/PostItem';
-import type { Post } from '@/types/post.interface';
+import type { ModifyPost } from '@/services/user/user.helper';
 
 import styles from './PostListBlock.module.scss';
 
 interface PostListBlockProps {
-  data: Post[];
+  posts: ModifyPost[];
 }
 
-const PostListBlock: React.FC<PostListBlockProps> = ({ data }) => (
+const PostListBlock: React.FC<PostListBlockProps> = ({ posts }) => (
   <section className={styles.root}>
-    {data.map((post) => (
-      <PostItem key={post.id} id={post.id} image={post.image} likesCount={post.likesCount} user={post.user} />
+    {posts.map((post) => (
+      <PostItem
+        key={post.id}
+        body={post.body}
+        createdAt={post.createdAt}
+        id={post.id}
+        image={post.image}
+        isLike={post.isLike}
+        likesCount={post.likesCount}
+        user={post.user}
+      />
     ))}
   </section>
 );

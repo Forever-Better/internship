@@ -11,7 +11,8 @@ export const postApi = api.injectEndpoints({
         url: getApiUrl.createPost(),
         method: 'POST',
         body: formData
-      })
+      }),
+      invalidatesTags: ['Post']
     })
   })
 });

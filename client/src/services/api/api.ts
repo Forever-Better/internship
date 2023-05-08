@@ -48,6 +48,6 @@ const baseQueryWithReauth: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQue
 export const api = createApi({
   reducerPath: 'splitApi',
   baseQuery: baseQueryWithReauth,
-  tagTypes: ['Post', 'Auth', 'User'],
+  tagTypes: ['Post', 'Auth', 'User', 'Like', 'Friend'],
   endpoints: () => ({})
 });

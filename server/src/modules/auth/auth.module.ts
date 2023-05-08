@@ -13,7 +13,6 @@ import { RtStrategy } from './strategies/rt.strategy';
   imports: [
     UserModule,
     PassportModule,
-
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],

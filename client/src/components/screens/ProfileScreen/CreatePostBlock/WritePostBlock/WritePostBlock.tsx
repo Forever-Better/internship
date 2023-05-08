@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 
-import { Icon20Cancel } from '@vkontakte/icons';
+import { Icon16User, Icon20Cancel } from '@vkontakte/icons';
 import { Avatar, Button, Separator, Spacing, Textarea } from '@vkontakte/vkui';
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
@@ -49,7 +49,7 @@ const WritePostBlock: React.FC<WritePostBlockProps> = ({ activeWriteBlock, setAc
     <div ref={ref} className={clsx(styles.root, 'block-fluid')}>
       <div className={styles.header}>
         <div className={styles.top}>
-          <Avatar size={28} src={userImage} />
+          <Avatar fallbackIcon={<Icon16User />} size={28} src={userImage} />
           <Controller
             control={control}
             name='body'

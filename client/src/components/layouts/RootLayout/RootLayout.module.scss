@@ -7,4 +7,8 @@
   @include breakpoint-down(lg) {
     grid-template-columns: 1fr;
   }
+
+  .footer {
+    padding: 6px 0;
+  }
 }

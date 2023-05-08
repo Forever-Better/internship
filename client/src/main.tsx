@@ -12,6 +12,8 @@ import RootLayout from './components/layouts/RootLayout/RootLayout.tsx';
 import AuthProvider from './components/providers/AuthProvider.tsx';
 import LoginForm from './components/screens/AuthScreen/LoginForm/LoginForm.tsx';
 import SignupForm from './components/screens/AuthScreen/SignupForm/SignupForm.tsx';
+import FeedScreen from './components/screens/FeedScreen/FeedScreen.tsx';
+import FriendsScreen from './components/screens/FriendsScreen/FriendsScreen.tsx';
 import ProfileScreen from './components/screens/ProfileScreen/ProfileScreen.tsx';
 import { UrlTemplates } from './lib/urlBuilder.ts';
 import { store } from './store/store.ts';
@@ -20,7 +22,8 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route element={<RootLayout />} path={UrlTemplates.Main}>
-        <Route element={<ProfileScreen />} path={UrlTemplates.Feed} />
+        <Route element={<FeedScreen />} path={UrlTemplates.Feed} />
+        <Route element={<FriendsScreen />} path={UrlTemplates.Friends} />
         <Route element={<ProfileScreen />} path={UrlTemplates.Profile} />
       </Route>
       <Route element={<AuthLayout />} path={UrlTemplates.Login}>
@@ -36,7 +39,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <Provider store={store}>
       <AuthProvider>
         <ThemeProvider defaultTheme='system'>
-          <ConfigProvider appearance='dark'>
+          <ConfigProvider appearance='light'>
             <AdaptivityProvider>
               <AppRoot mode='partial'>
                 {' '}

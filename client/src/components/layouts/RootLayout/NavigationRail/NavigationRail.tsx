@@ -1,4 +1,9 @@
-import { Icon24UserCircleOutline, Icon24NewsfeedOutline, Icon24MessageOutline } from '@vkontakte/icons';
+import {
+  Icon24UserCircleOutline,
+  Icon24NewsfeedOutline,
+  Icon24MessageOutline,
+  Icon24UsersOutline
+} from '@vkontakte/icons';
 import { Link } from 'react-router-dom';
 
 import { getPublicUrl } from '@/helpers/getPublicUrl';
@@ -26,6 +31,14 @@ const NavigationRail = () => {
             <NavigationRailItem>
               <Icon24NewsfeedOutline />
               Лента
+            </NavigationRailItem>
+          </Link>
+        </li>
+        <li>
+          <Link to={getPublicUrl.friends()}>
+            <NavigationRailItem>
+              <Icon24UsersOutline />
+              Друзья
             </NavigationRailItem>
           </Link>
         </li>

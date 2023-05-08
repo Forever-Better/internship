@@ -1,7 +1,7 @@
 import { Icon20ArrowRightOutline } from '@vkontakte/icons';
 import { Button, FormStatus, Separator, Spacing } from '@vkontakte/vkui';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { getPublicUrl } from '@/helpers/getPublicUrl';
 import { useLoginMutation } from '@/services/auth/auth.service';

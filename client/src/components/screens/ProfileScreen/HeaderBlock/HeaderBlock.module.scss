@@ -1,3 +1,62 @@
+@use '@/styles/util' as *;
+
 .root {
-  height: 500px;
+  display: grid;
+  grid-template-rows: 4fr 3fr;
+  width: 100%;
+  height: 360px;
+
+  .top {
+    background-color: var(--md-sys-color-tertiary);
+    margin: -16px -18px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    @include breakpoint-down(md) {
+      flex-direction: column;
+    }
+
+    .userContainer {
+      display: flex;
+      gap: 16px;
+      @include breakpoint-down(md) {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 12px;
+
+        .other {
+          display: flex;
+          gap: 12px;
+          color: var(--md-sys-color-on-surface-variant);
+
+          span,
+          button {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 14px;
+            line-height: 20px;
+            color: inherit;
+          }
+        }
+      }
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+    }
+  }
 }

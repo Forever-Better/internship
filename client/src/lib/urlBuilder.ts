@@ -3,6 +3,7 @@ export enum UrlTemplates {
   Feed = '/feed',
   Users = '/users',
   Profile = '/users/:userId',
+  Friends = '/friends',
   Dialogues = '/dialogues',
   Login = '/',
   Signup = '/signup'

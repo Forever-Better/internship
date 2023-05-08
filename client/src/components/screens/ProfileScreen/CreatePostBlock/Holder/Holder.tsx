@@ -1,3 +1,4 @@
+import { Icon16User } from '@vkontakte/icons';
 import { Avatar } from '@vkontakte/vkui';
 import clsx from 'clsx';
 
@@ -10,7 +11,7 @@ interface HolderProps {
 
 const Holder: React.FC<HolderProps> = ({ setActiveWriteBlock, userImage }) => (
   <button className={clsx(styles.root, 'block-fluid')} onClick={() => setActiveWriteBlock(true)}>
-    <Avatar size={28} src={userImage} />
+    <Avatar fallbackIcon={<Icon16User />} size={28} src={userImage} />
     <span>Сегодня я расскажу вам...</span>
   </button>
 );

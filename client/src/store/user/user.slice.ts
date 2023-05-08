@@ -18,7 +18,7 @@ export const userSlice = createSlice({
     setUser: (state, { payload }) => {
       state.user = payload;
     },
-    tokenReceived: (state, { payload }) => {
+    tokenReceived: (_, { payload }) => {
       saveToStorage(payload);
     },
     logout: (state) => {

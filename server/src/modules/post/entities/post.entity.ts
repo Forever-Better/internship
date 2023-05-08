@@ -28,7 +28,7 @@ export class Post {
   user: User;
 
   @CreateDateColumn({
-    type: 'timestamp',
+    type: 'timestamp with time zone',
     default: () => 'CURRENT_TIMESTAMP',
     name: 'created_at',
   })
@@ -45,6 +45,6 @@ export class Post {
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date;
 
-  @OneToMany(() => Like, (likes) => likes.post)
+  @OneToMany(() => Like, (likes) => likes.post, { eager: true })
   likes: Like[];
 }

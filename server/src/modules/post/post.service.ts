@@ -1,14 +1,17 @@
-import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
+import { ForbiddenException, Inject, Injectable, NotFoundException, forwardRef } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Not, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { Post } from './entities/post.entity';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { UserService } from '../user/user.service';
+import { PaginationOptions } from 'src/utils/types/pagination-options';
 
 @Injectable()
 export class PostService {
   constructor(
     @InjectRepository(Post)
+    @Inject(forwardRef(() => UserService))
     private repository: Repository<Post>,
   ) {}
 
@@ -20,14 +23,12 @@ export class PostService {
     });
   }
 
-  findAll() {
-    return this.repository.find({ order: { createdAt: 'DESC' } });
-  }
-
-  findUserPosts(userId: number) {
-    return this.repository.find({
+  async findManyWithPagination(userId: number, paginationOptions: PaginationOptions): Promise<Post[]> {
+    return await this.repository.find({
       where: { user: { id: userId } },
-      order: { createdAt: 'DESC' },
+      skip: (paginationOptions.page - 1) * paginationOptions.limit,
+      take: paginationOptions.limit,
+      relations: ['user'],
     });
   }
 
@@ -73,9 +74,5 @@ export class PostService {
     this.repository.softDelete(id);
 
     return find;
-  }
-
-  async findNext(id: number) {
-    return await this.repository.find({ where: { id: Not(id) }, take: 3 });
   }
 }

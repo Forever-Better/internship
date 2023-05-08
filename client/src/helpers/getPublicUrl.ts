@@ -13,6 +13,9 @@ export const getPublicUrl = {
   profile(userId: number) {
     return `${UrlTemplates.Users}/${userId}`;
   },
+  friends() {
+    return UrlTemplates.Friends;
+  },
   dialogues() {
     return UrlTemplates.Dialogues;
   }

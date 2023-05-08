@@ -1,8 +1,16 @@
 .root {
   width: 100%;
+  padding-top: 8px;
+  padding-bottom: 12px;
   overflow: hidden;
 
+  .body {
+    margin-bottom: 16px;
+  }
+
   .imageContainer {
+    padding: 12px 0;
+
     img {
       width: 100%;
       height: auto;

@@ -12,5 +12,4 @@ export interface User {
   likes: Post[];
   following: User[];
   followers: User[];
-  followersCount: number;
 }

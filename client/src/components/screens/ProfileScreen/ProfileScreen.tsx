@@ -14,22 +14,38 @@ const ProfileScreen = () => {
   const { userId } = useParams();
 
   const { user: owner } = useAuth();
-  const { data } = useGetUserQuery(Number(userId), { skip: !userId });
+  const { data, isLoading } = useGetUserQuery(
+    { userId: Number(userId), page: 1, limit: 50 },
+    { skip: !userId, refetchOnMountOrArgChange: true }
+  );
 
-  if (!data) return null;
+  if (!data || isLoading) return null;
+
+  const isOwner = owner?.id === data.user.id;
 
   return (
     <div className={styles.root}>
       <Spacing size={16} />
-      <HeaderBlock />
+      <HeaderBlock
+        firstName={data.user.firstName}
+        id={data.user.id}
+        image={data.user.image}
+        isOwner={isOwner}
+        isSubscribe={data.viewer.isFriend}
+        lastName={data.user.lastName}
+      />
       <Spacing size={16} />
       <div className={styles.container}>
         <div className={styles.postsContainer}>
-          <CreatePostBlock userImage={owner?.image} />
-          <Spacing size={16} />
-          <PostListBlock data={data.posts} />
+          {isOwner && (
+            <>
+              <CreatePostBlock userImage={owner?.image} />
+              <Spacing size={16} />
+            </>
+          )}
+          <PostListBlock posts={data.posts.data} />
         </div>{' '}
-        <FriendsBlock />
+        <FriendsBlock data={data.user.friends} />
       </div>
     </div>
   );

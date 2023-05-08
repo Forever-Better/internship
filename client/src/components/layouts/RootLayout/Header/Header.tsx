@@ -1,4 +1,4 @@
-import { Icon28DoorArrowRightOutline, Icon28User } from '@vkontakte/icons';
+import { Icon20User, Icon28DoorArrowRightOutline } from '@vkontakte/icons';
 import { Avatar, IconButton } from '@vkontakte/vkui';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -29,7 +29,7 @@ const Header = () => {
             {user && (
               <>
                 <button onClick={() => navigate(getPublicUrl.profile(user.id))}>
-                  <Avatar fallbackIcon={<Icon28User />} size={32} src={user.image} />
+                  <Avatar fallbackIcon={<Icon20User />} size={32} src={user.image} />
                 </button>
                 <IconButton size={32} width={32} onClick={() => logout()}>
                   <Icon28DoorArrowRightOutline height={24} width={24} />
