@@ -7,7 +7,9 @@ import { getApiUrl } from '@/helpers/getApiUrl';
 import { getAccessToken } from '../auth/auth.helper';
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_SERVER_URL,
+  // не стал разбираться как подключить env к github pages
+  // baseUrl: import.meta.env.VITE_SERVER_URL,
+  baseUrl: 'https://internship-8bi49n763-pakywka.vercel.app/api',
   credentials: 'include',
   prepareHeaders: (headers) => {
     const isRefreshtokenExist = headers.get('authorization');

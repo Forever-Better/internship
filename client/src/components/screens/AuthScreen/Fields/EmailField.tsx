@@ -18,7 +18,8 @@ const EmailField: React.FC<EmailFieldProps & React.HTMLProps<HTMLInputElement>> 
       ? {
           required: 'Введите адрес электронной почты.',
           pattern: {
-            value: /^(?=.*[0-9])(?=.*[a-z])(?=.*\W)(?!.* ).{8,16}$/,
+            value:
+              /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             message: 'Введите email'
           },
           minLength: {

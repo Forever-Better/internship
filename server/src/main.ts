@@ -12,7 +12,7 @@ async function bootstrap() {
 
   app.enableCors({
     credentials: true,
-    origin: [configService.get('app.clientDomain'), configService.get('app.dashboardDomain')],
+    origin: ['https://forever-better.github.io', configService.get('app.dashboardDomain')],
   });
   app.setGlobalPrefix(configService.get('app.apiPrefix'));
   app.useGlobalPipes(new ValidationPipe());

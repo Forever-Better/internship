@@ -20,11 +20,10 @@ const PasswordField: React.FC<PasswordFieldProps & React.HTMLProps<HTMLInputElem
     rules: strict
       ? {
           required: 'Введите пароль.',
-          pattern: {
-            value: /(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])/,
-            message:
-              'Должен содержать как строчные (a-z), так и прописные буквы (A-Z), хотя бы одну цифру (0-9) и символ.'
-          },
+          // pattern: {
+          //   value: /^(?=.*[0-9])(?=.*[a-z])/,
+          //   message: 'Должен содержать строчные буквы (a-z) и хотя бы одну цифру (0-9).'
+          // },
           minLength: {
             value: 8,
             message: 'Минимум 8 символов.'
