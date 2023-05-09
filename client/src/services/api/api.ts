@@ -9,7 +9,7 @@ import { getAccessToken } from '../auth/auth.helper';
 const baseQuery = fetchBaseQuery({
   // не стал разбираться как подключить env к github pages
   // baseUrl: import.meta.env.VITE_SERVER_URL,
-  baseUrl: 'https://internship-8bi49n763-pakywka.vercel.app/api',
+  baseUrl: 'https://thepirate.press/server',
   credentials: 'include',
   prepareHeaders: (headers) => {
     const isRefreshtokenExist = headers.get('authorization');
