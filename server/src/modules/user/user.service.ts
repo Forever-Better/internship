@@ -161,8 +161,6 @@ export class UserService {
     // формируем список друзей т.к. имеем косяк (нужно изменить систему друзей)
     const friends = [...following?.map((item) => item.followingTo), ...followers?.map((item) => item.user)];
 
-    const possibleFriends = [];
-
     const filterUsers = tenUsers.filter((user) => !friends.map((friend) => friend.id).includes(user.id));
 
     return filterUsers;

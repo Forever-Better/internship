@@ -32,7 +32,8 @@ const router = createBrowserRouter(
         <Route element={<SignupForm />} path={UrlTemplates.Signup} />
       </Route>
     </>
-  )
+  ),
+  { basename: '/internship' }
 );
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(

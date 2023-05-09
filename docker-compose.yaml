@@ -1,11 +1,11 @@
 version: '3.8'
 services:
   postgres:
-    container_name: postgres_database
+    container_name: pg_db
     image: postgres:alpine
     restart: unless-stopped
     ports:
-      - 5432:5432
+      - 5433:5432
     env_file: .env
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -15,22 +15,22 @@ services:
       - pgdata:/var/lib/postgresql/data
     networks:
       net:
-        ipv4_address: 172.16.0.2
+        ipv4_address: 172.16.0.3
 
-  # server:
-  #   container_name: server
-  #   restart: unless-stopped
-  #   build:
-  #     context: server
-  #   ports:
-  #     - '5000:5000'
-  #   depends_on:
-  #     - postgres
-  #   volumes:
-  #     - media:/usr/src/server/media
-  #   networks:
-  #     net:
-  #       ipv4_address: 172.18.0.1
+  server:
+    container_name: internship_server
+    restart: unless-stopped
+    build:
+      context: server
+    ports:
+      - '5001:5001'
+    depends_on:
+      - postgres
+    volumes:
+      - media:/usr/src/server/media
+    networks:
+      net:
+        ipv4_address: 172.16.0.2
 
 volumes:
   pgdata:
