@@ -9,7 +9,9 @@ const FriendsScreen = () => (
     <Spacing size={16} />
     <div className={styles.content}>
       <FriendListBlock />
-      <PossibleFriendList />
+      <div className={styles.fixed}>
+        <PossibleFriendList />
+      </div>
     </div>
   </div>
 );

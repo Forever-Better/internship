@@ -10,18 +10,28 @@ export const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getUser: builder.query<GetUserResponse, GetUserRequest>({
       query: ({ userId, ...options }) => getApiUrl.getUser(userId, options),
-      providesTags: ['Like', 'Post', 'Friend']
+      providesTags: ['Post', 'Friend']
     }),
     getFriendsPostList: builder.query<GetFriendsPostListResponse, PaginationOptions>({
       query: (options) => getApiUrl.getFriendsPostList(options),
       keepUnusedDataFor: 600,
-      providesTags: ['Like', 'Post', 'Friend']
+      providesTags: ['Post', 'Friend']
     }),
     getFriendList: builder.query<User[], void>({
       query: () => getApiUrl.getFriends(),
+      providesTags: ['Friend']
+    }),
+    getPossibleFriends: builder.query<User[], void>({
+      query: () => getApiUrl.getPossibleFriends(),
       providesTags: ['Friend']
     })
   })
 });
 
-export const { useGetFriendListQuery, useGetFriendsPostListQuery, useGetUserQuery, useLazyGetUserQuery } = userApi;
+export const {
+  useGetFriendListQuery,
+  useGetFriendsPostListQuery,
+  useGetPossibleFriendsQuery,
+  useGetUserQuery,
+  useLazyGetUserQuery
+} = userApi;

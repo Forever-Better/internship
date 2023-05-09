@@ -5,6 +5,12 @@
   padding: 0 16px;
 }
 
+.block {
+  padding: 4px 8px 12px;
+  border-radius: 12px;
+  background-color: var(--vkui--color_background_content);
+}
+
 .block-fluid {
   padding: 16px 18px;
   border-radius: 12px;

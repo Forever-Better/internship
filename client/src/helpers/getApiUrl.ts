@@ -22,6 +22,9 @@ export const getApiUrl = {
   createPost() {
     return ApiUrlTemplates.Posts;
   },
+  removePost(postId: number) {
+    return `${ApiUrlTemplates.Posts}/${postId}`;
+  },
   likePost(postId: number) {
     return `${ApiUrlTemplates.Posts}/${postId}/likes`;
   },
@@ -38,6 +41,6 @@ export const getApiUrl = {
     return `${ApiUrlTemplates.Users}/friends`;
   },
   getPossibleFriends() {
-    return `${ApiUrlTemplates.Users}/0/friends`;
+    return `${ApiUrlTemplates.Users}/friends/possible`;
   }
 };

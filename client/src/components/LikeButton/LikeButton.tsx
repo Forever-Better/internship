@@ -1,8 +1,11 @@
-import { Icon24LikeOutline, Icon28LikeFillRed } from '@vkontakte/icons';
-import { Button } from '@vkontakte/vkui';
+import { Icon28LikeOutline, Icon28LikeFillRed } from '@vkontakte/icons';
+import { IconButton } from '@vkontakte/vkui';
+import clsx from 'clsx';
+import { useState } from 'react';
 
 import { useCreateLikeMutation, useRemoveLikeMutation } from '@/services/like/like.service';
-import { useLazyGetUserQuery } from '@/services/user/user.service';
+
+import styles from './LikeButton.module.scss';
 
 interface LikeButtonProps {
   likesCount: number;
@@ -10,28 +13,35 @@ interface LikeButtonProps {
   postId: number;
 }
 
-const LikeButton: React.FC<LikeButtonProps> = ({ isLike, likesCount, postId }) => {
+const LikeButton: React.FC<LikeButtonProps> = ({ isLike, likesCount: count, postId }) => {
+  const [likeStatus, setLikeStatus] = useState(isLike);
+  const [likesCount, setLikesCount] = useState(count);
   const [createLike] = useCreateLikeMutation();
   const [removeLike] = useRemoveLikeMutation();
-  const [getUser] = useLazyGetUserQuery();
 
   const handleOnClick = () => {
-    if (isLike) {
-      return removeLike(postId);
+    if (likeStatus) {
+      return removeLike(postId)
+        .unwrap()
+        .then(() => {
+          setLikeStatus(false);
+          setLikesCount((prev) => prev - 1);
+        });
     }
 
-    return createLike(postId);
+    return createLike(postId)
+      .unwrap()
+      .then(() => {
+        setLikeStatus(true);
+        setLikesCount((prev) => prev + 1);
+      });
   };
 
   return (
-    <Button
-      appearance='neutral'
-      before={isLike ? <Icon28LikeFillRed width={24} /> : <Icon24LikeOutline />}
-      mode='secondary'
-      onClick={handleOnClick}
-    >
-      {likesCount}
-    </Button>
+    <IconButton activeMode='true' className={styles.likeButton} onClick={handleOnClick}>
+      {likeStatus ? <Icon28LikeFillRed /> : <Icon28LikeOutline color='var(--vkui--color_icon_medium)' />}
+      {likesCount > 0 && <span className={clsx(styles.label, likeStatus && styles.red)}>{likesCount}</span>}
+    </IconButton>
   );
 };
 

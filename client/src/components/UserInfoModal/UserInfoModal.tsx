@@ -1,65 +1,68 @@
 import {
   Icon20ArticleOutline,
-  Icon20CommunityName,
+  Icon20EducationOutline,
   Icon20MentionOutline,
-  Icon20MessageOutline,
+  Icon20DiamondOutline,
   Icon20PlaceOutline,
-  Icon24Cancel,
-  Icon24Dismiss
+  Icon24Cancel
 } from '@vkontakte/icons';
-import { MiniInfoCell, ModalPage, ModalPageHeader, ModalRoot, PanelHeaderButton, Separator } from '@vkontakte/vkui';
+import {
+  MiniInfoCell,
+  ModalPage,
+  ModalPageHeader,
+  ModalRoot,
+  PanelHeaderButton,
+  Separator,
+  useAdaptivityConditionalRender
+} from '@vkontakte/vkui';
 import React from 'react';
+
+import { plural } from '@/helpers/plural';
+import type { User } from '@/types/user.interface';
 
 interface UserInfoModalProps {
   activeModal: string;
-  closeModal: (modalId: string) => void;
+  closeModal: any;
+  info: User;
 }
 
-const UserInfoModal: React.FC<UserInfoModalProps> = ({ activeModal, closeModal }) => (
-  <ModalRoot activeModal={activeModal} onClose={closeModal}>
-    <ModalPage
-      id='extended_info'
-      header={
-        <ModalPageHeader
-          after={
-            <PanelHeaderButton onClick={closeModal}>
-              <Icon24Dismiss />
-            </PanelHeaderButton>
-          }
-          before={
-            <PanelHeaderButton onClick={closeModal}>
-              <Icon24Cancel />
-            </PanelHeaderButton>
-          }
-        >
-          Подробнее
-        </ModalPageHeader>
-      }
-    >
-      <Separator style={{ marginBottom: 12 }} />
+const UserInfoModal: React.FC<UserInfoModalProps> = ({ activeModal, closeModal, info }) => {
+  const { sizeX } = useAdaptivityConditionalRender();
 
-      <MiniInfoCell before={<Icon20CommunityName />} textWrap='full'>
-        Команда вконтакте
-      </MiniInfoCell>
+  return (
+    <ModalRoot activeModal={activeModal} onClose={closeModal}>
+      <ModalPage
+        id='extended_info'
+        header={
+          <ModalPageHeader
+            before={
+              sizeX.compact && (
+                <PanelHeaderButton onClick={closeModal}>
+                  <Icon24Cancel />
+                </PanelHeaderButton>
+              )
+            }
+          >
+            Подробнее
+          </ModalPageHeader>
+        }
+      >
+        <Separator style={{ marginBottom: 12 }} />
 
-      <MiniInfoCell before={<Icon20MessageOutline />} textWrap='full'>
-        Официальная страница Команды ВКонтакте.
-      </MiniInfoCell>
-
-      <MiniInfoCell before={<Icon20ArticleOutline />} textWrap='full'>
-        ВКонтакте начинался как сайт для выпускников вузов, а сейчас это огромная экосистема с безграничными
-        возможностями и миллионами пользователей.
-      </MiniInfoCell>
-
-      <Separator style={{ marginTop: 12, marginBottom: 12 }} />
-
-      <MiniInfoCell before={<Icon20PlaceOutline />}>Санкт-Петербург, Россия</MiniInfoCell>
-
-      <MiniInfoCell before={<Icon20MentionOutline />}>team</MiniInfoCell>
-
-      <div style={{ height: 24 }} />
-    </ModalPage>
-  </ModalRoot>
-);
+        <MiniInfoCell before={<Icon20ArticleOutline />} textWrap='full'>
+          Хочу работать ВКонтакте.
+        </MiniInfoCell>
+        <MiniInfoCell before={<Icon20MentionOutline />}>React team</MiniInfoCell>
+        <Separator style={{ marginTop: 12, marginBottom: 12 }} />
+        <MiniInfoCell before={<Icon20DiamondOutline />}>
+          {info.age} {plural(info.age, ['год', 'года', 'лет', 'лет'])}
+        </MiniInfoCell>
+        <MiniInfoCell before={<Icon20PlaceOutline />}>{info.city}</MiniInfoCell>
+        <MiniInfoCell before={<Icon20EducationOutline />}>{info.university}</MiniInfoCell>
+        <div style={{ height: 24 }} />
+      </ModalPage>
+    </ModalRoot>
+  );
+};
 
 export default UserInfoModal;

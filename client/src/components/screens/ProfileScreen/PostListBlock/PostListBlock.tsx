@@ -5,21 +5,13 @@ import styles from './PostListBlock.module.scss';
 
 interface PostListBlockProps {
   posts: ModifyPost[];
+  owner?: boolean | null;
 }
 
-const PostListBlock: React.FC<PostListBlockProps> = ({ posts }) => (
+const PostListBlock: React.FC<PostListBlockProps> = ({ owner, posts }) => (
   <section className={styles.root}>
     {posts.map((post) => (
-      <PostItem
-        key={post.id}
-        body={post.body}
-        createdAt={post.createdAt}
-        id={post.id}
-        image={post.image}
-        isLike={post.isLike}
-        likesCount={post.likesCount}
-        user={post.user}
-      />
+      <PostItem key={post.id} owner={owner} post={post} user={post.user} />
     ))}
   </section>
 );

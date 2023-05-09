@@ -13,8 +13,15 @@ export const postApi = api.injectEndpoints({
         body: formData
       }),
       invalidatesTags: ['Post']
+    }),
+    removePost: builder.mutation<void, number>({
+      query: (postId: number) => ({
+        url: getApiUrl.removePost(postId),
+        method: 'DELETE'
+      }),
+      invalidatesTags: ['Post']
     })
   })
 });
 
-export const { useCreatePostMutation } = postApi;
+export const { useCreatePostMutation, useRemovePostMutation } = postApi;

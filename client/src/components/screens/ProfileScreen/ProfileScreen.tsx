@@ -19,21 +19,16 @@ const ProfileScreen = () => {
     { skip: !userId, refetchOnMountOrArgChange: true }
   );
 
-  if (!data || isLoading) return null;
+  if (isLoading) return null;
+
+  if (!data) return null;
 
   const isOwner = owner?.id === data.user.id;
 
   return (
     <div className={styles.root}>
       <Spacing size={16} />
-      <HeaderBlock
-        firstName={data.user.firstName}
-        id={data.user.id}
-        image={data.user.image}
-        isOwner={isOwner}
-        isSubscribe={data.viewer.isFriend}
-        lastName={data.user.lastName}
-      />
+      <HeaderBlock info={data.user} isOwner={isOwner} isSubscribe={data.viewer.isFriend} />
       <Spacing size={16} />
       <div className={styles.container}>
         <div className={styles.postsContainer}>
@@ -43,7 +38,7 @@ const ProfileScreen = () => {
               <Spacing size={16} />
             </>
           )}
-          <PostListBlock posts={data.posts.data} />
+          <PostListBlock owner={isOwner} posts={data.posts.data} />
         </div>{' '}
         <FriendsBlock data={data.user.friends} />
       </div>

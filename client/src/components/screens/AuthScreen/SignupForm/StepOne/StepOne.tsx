@@ -1,7 +1,7 @@
 import { Icon20ArrowLeftOutline } from '@vkontakte/icons';
 import { Button, Separator, Spacing } from '@vkontakte/vkui';
 import { useFormContext } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { getPublicUrl } from '@/helpers/getPublicUrl';
 import type { SignupFormFields } from '@/types/signup-form-fields.interface';

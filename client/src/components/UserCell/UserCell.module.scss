@@ -1,0 +1,62 @@
+.userCell {
+  min-height: 48px;
+
+  .container {
+    &.padding {
+      padding: 0 16px;
+    }
+
+    .wrap {
+      display: flex;
+      align-items: center;
+
+      .start {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+
+        .main {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          flex-grow: 1;
+          max-width: 100%;
+          min-width: 0;
+          padding: 12px 0;
+
+          .content {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            .title {
+              font-size: 16px;
+              font-weight: 400;
+              line-height: 20px;
+
+              &.bold {
+                font-weight: 500;
+              }
+            }
+
+            .badge {
+              color: var(--vkui--color_icon_accent);
+            }
+
+            .subtitle {
+              font-size: 13px;
+              color: var(--vkui--color_text_secondary);
+              line-height: 16px;
+            }
+          }
+        }
+      }
+
+      .end {
+        margin-right: -12px;
+        color: var(--vkui--color_icon_accent);
+      }
+    }
+  }
+}

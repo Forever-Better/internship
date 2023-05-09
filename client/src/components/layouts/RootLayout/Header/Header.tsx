@@ -8,7 +8,6 @@ import { useAuth } from '@/hooks/useAuth';
 
 import Brand from './Brand/Brand';
 import styles from './Header.module.scss';
-import ThemeButton from './ThemeButton/ThemeButton';
 
 const Header = () => {
   const navigate = useNavigate();
@@ -25,7 +24,7 @@ const Header = () => {
             </Link>
           </div>
           <div className={styles.right}>
-            <ThemeButton />
+            {/* <ThemeButton /> */}
             {user && (
               <>
                 <button onClick={() => navigate(getPublicUrl.profile(user.id))}>

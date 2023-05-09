@@ -6,10 +6,12 @@ export interface User {
   firstName: string;
   lastName: string;
   image: string;
+  age: number;
+  city: string;
+  university: string;
   createdAt: Date;
   updatedAt: Date;
   posts: Post[];
   likes: Post[];
-  following: User[];
-  followers: User[];
+  friends: User[];
 }

@@ -1,10 +1,10 @@
 import { Icon12Verified, Icon24User } from '@vkontakte/icons';
-import { Avatar, Group, Header, SimpleCell } from '@vkontakte/vkui';
-import { Link } from 'react-router-dom';
+import { Avatar, Group, Header } from '@vkontakte/vkui';
 
 import FollowButton from '@/components/FollowButton/FollowButton';
+import UserCell from '@/components/UserCell/UserCell';
 import { getPublicUrl } from '@/helpers/getPublicUrl';
-import { useGetPossibleFriendsQuery } from '@/services/follow/follow.service';
+import { useGetPossibleFriendsQuery } from '@/services/user/user.service';
 
 const PossibleFriendList = () => {
   const { data, isLoading } = useGetPossibleFriendsQuery();
@@ -12,24 +12,25 @@ const PossibleFriendList = () => {
   if (isLoading) return null;
 
   return (
-    <Group>
+    <Group separator='hide'>
       <Header mode='primary' size='large'>
-        Список друзей
+        Возможные друзья
       </Header>
       {data?.length &&
         data?.map((friend) => (
-          <Link key={friend.id} to={getPublicUrl.profile(friend.id)}>
-            <SimpleCell
-              after={<FollowButton hasSubscription icon userId={friend.id} />}
-              badgeAfterTitle={<Icon12Verified />}
-              before={<Avatar fallbackIcon={<Icon24User />} size={44} src={friend.image} />}
-              subtitle='Команда ВКонтакте'
-            >
-              {friend.firstName}
-              {` `}
-              {friend.lastName}
-            </SimpleCell>
-          </Link>
+          <UserCell
+            key={friend.id}
+            padding
+            after={<FollowButton icon hasSubscription={false} userId={friend.id} />}
+            avatar={<Avatar fallbackIcon={<Icon24User />} size={44} src={friend.image} />}
+            badgeAfterTitle={<Icon12Verified />}
+            href={getPublicUrl.profile(friend.id)}
+            subtitle='Команда ВКонтакте'
+          >
+            {friend.firstName}
+            {` `}
+            {friend.lastName}
+          </UserCell>
         ))}
     </Group>
   );

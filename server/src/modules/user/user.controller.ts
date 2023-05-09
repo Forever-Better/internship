@@ -42,6 +42,12 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('friends/possible')
+  findPossibleFriends(@Request() req): Promise<User[]> {
+    return this.userService.findPossibleFriends(req.user.id);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   async findOne(
     @Request() req,

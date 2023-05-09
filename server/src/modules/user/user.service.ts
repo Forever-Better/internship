@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm/dist';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -148,5 +148,23 @@ export class UserService {
     const friends = [...following?.map((item) => item.followingTo), ...followers?.map((item) => item.user)];
 
     return friends;
+  }
+
+  async findPossibleFriends(userId: number): Promise<User[]> {
+    const tenUsers = await this.repository.find({ where: { id: Not(userId) } });
+
+    const { following, followers } = await this.repository.findOne({
+      where: { id: userId },
+      relations: ['followers.user', 'following.followingTo'],
+    });
+
+    // формируем список друзей т.к. имеем косяк (нужно изменить систему друзей)
+    const friends = [...following?.map((item) => item.followingTo), ...followers?.map((item) => item.user)];
+
+    const possibleFriends = [];
+
+    const filterUsers = tenUsers.filter((user) => !friends.map((friend) => friend.id).includes(user.id));
+
+    return filterUsers;
   }
 }

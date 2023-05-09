@@ -1,15 +1,25 @@
 .root {
   width: 100%;
-  padding-top: 8px;
-  padding-bottom: 12px;
+  padding: 0 14px;
   overflow: hidden;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .userInfo {
+      flex-grow: 1;
+      width: 100px;
+    }
+  }
 
   .body {
     margin-bottom: 16px;
   }
 
   .imageContainer {
-    padding: 12px 0;
+    padding-top: 12px;
 
     img {
       width: 100%;

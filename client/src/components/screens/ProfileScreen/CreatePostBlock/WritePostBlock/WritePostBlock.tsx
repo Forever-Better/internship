@@ -1,7 +1,5 @@
-/* eslint-disable jsx-a11y/no-autofocus */
-
 import { Icon16User, Icon20Cancel } from '@vkontakte/icons';
-import { Avatar, Button, Separator, Spacing, Textarea } from '@vkontakte/vkui';
+import { Avatar, Button, Group, Spacing, Textarea } from '@vkontakte/vkui';
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
@@ -46,40 +44,40 @@ const WritePostBlock: React.FC<WritePostBlockProps> = ({ activeWriteBlock, setAc
   if (!activeWriteBlock) return null;
 
   return (
-    <div ref={ref} className={clsx(styles.root, 'block-fluid')}>
-      <div className={styles.header}>
-        <div className={styles.top}>
-          <Avatar fallbackIcon={<Icon16User />} size={28} src={userImage} />
-          <Controller
-            control={control}
-            name='body'
-            render={({ field: { onBlur, onChange, value } }) => (
-              <Textarea className={styles.textarea} value={value as string} onBlur={onBlur} onChange={onChange} />
+    <Group separator='hide'>
+      <div ref={ref} className={styles.root}>
+        <div className={styles.header}>
+          <div className={styles.top}>
+            <Avatar fallbackIcon={<Icon16User />} size={28} src={userImage} />
+            <Controller
+              control={control}
+              name='body'
+              render={({ field: { onBlur, onChange, value } }) => (
+                <Textarea className={styles.textarea} value={value as string} onBlur={onBlur} onChange={onChange} />
+              )}
+            />
+          </div>
+          <div className={clsx(styles.imageContainer, image && styles.isExist)}>
+            {image && (
+              <>
+                <img alt='Фотография' className={styles.image} src={image} />
+                <button className={styles.deleteButton} onClick={handleDelete}>
+                  <Icon20Cancel />
+                </button>
+              </>
             )}
-          />
+          </div>
         </div>
-        <div className={clsx(styles.imageContainer, image && styles.isExist)}>
-          {image && (
-            <>
-              <img alt='Фотография' className={styles.image} src={image} />
-              <button className={styles.deleteButton} onClick={handleDelete}>
-                <Icon20Cancel />
-              </button>
-            </>
-          )}
+        <input className='hidden' />
+        <Spacing size={32} />
+        <div className={styles.footer}>
+          <UploadImageBlock image={image} setImage={setImage} />
+          <Button appearance='accent-invariable' size='m' onClick={onSubmit}>
+            Опубликовать
+          </Button>
         </div>
       </div>
-      <input className='hidden' />
-      <Spacing size={32}>
-        <Separator />
-      </Spacing>
-      <div className={styles.footer}>
-        <UploadImageBlock image={image} setImage={setImage} />
-        <Button appearance='accent-invariable' size='m' onClick={onSubmit}>
-          Опубликовать
-        </Button>
-      </div>
-    </div>
+    </Group>
   );
 };
 

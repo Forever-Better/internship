@@ -1,0 +1,16 @@
+.likeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+
+  .label {
+    font-weight: 700 !important;
+    color: var(--vkui--color_icon_medium);
+    padding-right: 10px;
+
+    &.red {
+      color: var(--vkui--color_accent_red--active);
+    }
+  }
+}

@@ -6,7 +6,7 @@ import { useFollowMutation, useUnfollowMutation } from '@/services/follow/follow
 interface FollowButtonProps {
   userId: number;
   hasSubscription: boolean;
-  icon: boolean;
+  icon?: boolean;
 }
 
 const FollowButton: React.FC<FollowButtonProps> = ({ hasSubscription, icon, userId }) => {
