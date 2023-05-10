@@ -6,14 +6,14 @@ export interface User {
   firstName: string;
   lastName: string;
   image: string;
-  status: string | null;
-  age: number | null;
-  city: string | null;
-  university: string | null;
+  status: string;
+  age: number;
+  city: string;
+  university: string;
   createdAt: Date;
   updatedAt: Date;
   posts: Post[];
   likes: Post[];
   friends: User[];
-  cover: string | null;
+  cover: string;
 }

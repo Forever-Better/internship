@@ -53,7 +53,13 @@ const WritePostBlock: React.FC<WritePostBlockProps> = ({ activeWriteBlock, setAc
               control={control}
               name='body'
               render={({ field: { onBlur, onChange, value } }) => (
-                <Textarea className={styles.textarea} value={value as string} onBlur={onBlur} onChange={onChange} />
+                <Textarea
+                  autoFocus
+                  className={styles.textarea}
+                  value={value as string}
+                  onBlur={onBlur}
+                  onChange={onChange}
+                />
               )}
             />
           </div>

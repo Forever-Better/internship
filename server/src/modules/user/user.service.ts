@@ -37,20 +37,8 @@ export class UserService {
     // формируем список друзей т.к. имеем косяк (нужно изменить систему друзей)
     const friends = [...user.following.map((item) => item.followingTo), ...user.followers.map((item) => item.user)];
 
-    // запрашиваем лайки просматривающего
-    const { likes } = await this.repository.findOne({
-      where: { id: viewerId },
-      relations: ['likes.post.user'],
-    });
-
     // посты пользователя с пагинацией
     const paginatePosts = await this.postService.findManyWithPagination(id, options);
-
-    // фильтруем лайки проматривающего на отношение к пользователю. получаем =>
-    // посты, оценные промастривающим на странице пользователя
-    const likedPosts = likes
-      .filter((like) => like?.post?.user?.id === user?.id)
-      .map((like) => ({ ...like?.post, likesCount: like?.post?.likes?.length, isLike: true }));
 
     // новый массив для последующего формирования
     const posts = [];
@@ -59,10 +47,10 @@ export class UserService {
     for (let i = 0; i <= paginatePosts.length - 1; i++) {
       const paginatePost = paginatePosts[i];
 
-      for (let k = 0; k <= likedPosts.length - 1; k++) {
-        const likedPost = likedPosts[k];
+      for (let k = 0; k <= paginatePost.likes.length - 1; k++) {
+        const userId = paginatePost.likes[k].user?.id;
 
-        if (paginatePost.id === likedPost.id) {
+        if (userId === viewerId) {
           posts.push({ ...paginatePost, likesCount: paginatePost?.likes?.length, isLike: true });
           break;
         }
@@ -115,9 +103,14 @@ export class UserService {
 
   async findFriendsPostList(userId: number, paginationOptions: PaginationOptions): Promise<Post[]> {
     // получаем информацию о пользователе, который сделал запрос
-    const { followers, following, likes } = await this.repository.findOne({
+    const { followers, following } = await this.repository.findOne({
       where: { id: userId },
-      relations: ['followers.user.posts.user', 'following.followingTo.posts.user', 'likes.post'],
+      relations: [
+        'followers.user.posts.likes.user',
+        'following.followingTo.posts.likes.user',
+        'followers.user.posts.user',
+        'following.followingTo.posts.user',
+      ],
     });
 
     // формируем список друзей т.к. имеем косяк (нужно изменить систему друзей)
@@ -133,15 +126,24 @@ export class UserService {
     // новый массив для последующего формирования
     const posts = [];
 
+    // const posts = friendPosts
+    //   .filter((post) => post.likes.map((like) => like.user.id).includes(userId))
+    //   .map((post) => ({ ...post, isLike: true }));
+
     for (let i = 0; i <= friendPosts.length - 1; i++) {
-      for (let k = 0; k <= likes?.length - 1; k++) {
-        if (friendPosts[i]?.id === likes[k]?.post?.id) {
-          posts.push({ ...friendPosts[i], likesCount: friendPosts[i].likes?.length, isLike: true });
+      const friendPost = friendPosts[i];
+
+      for (let k = 0; k <= friendPost?.likes?.length - 1; k++) {
+        const likeUserId = friendPost.likes[k].user?.id;
+
+        if (likeUserId === userId) {
+          posts.push({ ...friendPost, likesCount: friendPost.likes?.length, isLike: true });
           break;
         }
       }
-      if (!posts.find((post) => post?.id === friendPosts[i]?.id)) {
-        posts.push({ ...friendPosts[i], likesCount: friendPosts[i].likes?.length, isLike: false });
+
+      if (!posts.find((post) => post?.id === friendPost?.id)) {
+        posts.push({ ...friendPost, likesCount: friendPost.likes?.length, isLike: false });
       }
     }
 

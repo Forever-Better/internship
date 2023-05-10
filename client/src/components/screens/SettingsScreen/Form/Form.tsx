@@ -1,8 +1,7 @@
 import { Button, FormItem, FormLayoutGroup, FormStatus, Input, Spacing } from '@vkontakte/vkui';
 import { useState } from 'react';
-import { FormProvider, useController, useForm } from 'react-hook-form';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
 
-import { getFormFieldStatus } from '@/helpers/getFormFieldStatus';
 import { useUpdateMeMutation } from '@/services/user/user.service';
 import { ProfileForm } from '@/types/enums';
 import type { UpdateProfileFormFields } from '@/types/update-profile-form-fields.interface';
@@ -24,34 +23,9 @@ const Form: React.FC<{ data: User }> = ({ data }) => {
       university: data?.university
     }
   });
-
-  const { field: statusField } = useController<UpdateProfileFormFields>({
-    name: ProfileForm.STATUS,
-    control: methods.control
-  });
-  const { field: firstNameField, fieldState: firstNameFieldState } = useController<UpdateProfileFormFields>({
-    name: ProfileForm.FIRSTNAME,
-    control: methods.control,
-    rules: { required: 'Обязательное поле', minLength: { value: 3, message: 'Минимум 3 символа' } }
-  });
-  const { field: lastNameField, fieldState: lastNameFieldState } = useController<UpdateProfileFormFields>({
-    name: ProfileForm.LASTNAME,
-    control: methods.control,
-    rules: { required: 'Обязательное поле', minLength: { value: 3, message: 'Минимум 3 символа' } }
-  });
-  const { field: universityField } = useController<UpdateProfileFormFields>({
-    name: ProfileForm.UNIVERSITY,
-    control: methods.control
-  });
-  const { field: ageField } = useController<UpdateProfileFormFields>({
-    name: ProfileForm.AGE,
-    control: methods.control
-  });
-  const { field: cityField } = useController<UpdateProfileFormFields>({
-    name: ProfileForm.CITY,
-    control: methods.control
-  });
   const [image, setImage] = useState(data?.image);
+
+  const { control } = methods;
 
   const onSubmit = methods.handleSubmit((data) => {
     updateMe(data);
@@ -71,39 +45,40 @@ const Form: React.FC<{ data: User }> = ({ data }) => {
         <FormProvider {...methods}>
           <ImageUploadBlock image={image} setImage={setImage} />
           <FormItem top='Статус'>
-            <Input {...statusField} />
+            <Controller control={control} name={ProfileForm.STATUS} render={({ field }) => <Input {...field} />} />
           </FormItem>
           <FormLayoutGroup mode='horizontal'>
-            <FormItem
-              // bottom={firstNameFieldState.error?.message}
-              // status={getFormFieldStatus(firstNameFieldState.invalid, firstNameFieldState.isDirty)}
-              top='Имя'
-            >
-              <Input
-                // status={getFormFieldStatus(firstNameFieldState.invalid, firstNameFieldState.isDirty)}
-                {...firstNameField}
+            <FormItem top='Имя *'>
+              <Controller
+                control={control}
+                name='firstName'
+                render={({ field }) => <Input {...field} />}
+                rules={{ required: true, minLength: 3 }}
               />
             </FormItem>
-            <FormItem
-              // bottom={lastNameFieldState.error?.message}
-              // status={getFormFieldStatus(lastNameFieldState.invalid, lastNameFieldState.isDirty)}
-              top='Фамилия'
-            >
-              <Input
-                // status={getFormFieldStatus(lastNameFieldState.invalid, lastNameFieldState.isDirty)}
-                {...lastNameField}
+            <FormItem top='Фамилия *'>
+              <Controller
+                control={control}
+                name={ProfileForm.LASTNAME}
+                render={({ field }) => <Input {...field} />}
+                rules={{ required: true, minLength: 3 }}
               />
             </FormItem>
           </FormLayoutGroup>
           <FormItem top='Университет'>
-            <Input {...universityField} />
+            <Controller control={control} name='university' render={({ field }) => <Input {...field} />} />
           </FormItem>
           <FormLayoutGroup mode='horizontal'>
-            <FormItem top='Возраст'>
-              <Input {...ageField} />
+            <FormItem top='Возраст *'>
+              <Controller
+                control={control}
+                name='age'
+                render={({ field }) => <Input {...field} />}
+                rules={{ required: true }}
+              />
             </FormItem>
             <FormItem top='Город'>
-              <Input {...cityField} />
+              <Controller control={control} name='city' render={({ field }) => <Input {...field} />} />
             </FormItem>
           </FormLayoutGroup>
         </FormProvider>

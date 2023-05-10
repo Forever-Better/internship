@@ -1,4 +1,4 @@
-import { Icon12Verified, Icon24User } from '@vkontakte/icons';
+import { Icon12Verified, Icon28User } from '@vkontakte/icons';
 import { Avatar, Group, Header, Spacing } from '@vkontakte/vkui';
 
 import FollowButton from '@/components/FollowButton/FollowButton';
@@ -28,7 +28,7 @@ const FriendListBlock = () => {
             key={friend.id}
             padding
             after={<FollowButton hasSubscription icon userId={friend.id} />}
-            avatar={<Avatar fallbackIcon={<Icon24User />} size={64} src={friend.image} />}
+            avatar={<Avatar fallbackIcon={<Icon28User />} size={64} src={friend.image} />}
             badgeAfterTitle={<Icon12Verified />}
             href={getPublicUrl.profile(friend.id)}
             subtitle='Команда ВКонтакте'

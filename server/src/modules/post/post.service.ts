@@ -28,7 +28,7 @@ export class PostService {
       where: { user: { id: userId } },
       skip: (paginationOptions.page - 1) * paginationOptions.limit,
       take: paginationOptions.limit,
-      relations: ['user'],
+      relations: ['user', 'likes.user'],
     });
   }
 
