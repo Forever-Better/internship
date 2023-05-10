@@ -21,14 +21,13 @@ interface HeaderBlockProps {
 const HeaderBlock: React.FC<HeaderBlockProps> = ({ info, isOwner, isSubscribe }) => {
   const navigate = useNavigate();
   const [activeModal, setActiveModal] = useState('');
-  const [cover, setCover] = useState<string | null>(info.cover);
 
   return (
     <section>
       <Group separator='hide'>
         <div className={clsx(styles.root, 'block-fluid')}>
-          <div className={styles.top} style={{ backgroundImage: `url(${cover})` }}>
-            {isOwner && <ChangeCoverBlock cover={cover} setCover={setCover} />}
+          <div className={styles.top} style={{ backgroundImage: `url(${info.cover})` }}>
+            {isOwner && <ChangeCoverBlock cover={info.cover} />}
           </div>
           <div className={styles.bottom}>
             <div className={styles.userContainer}>

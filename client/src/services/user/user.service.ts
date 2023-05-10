@@ -17,18 +17,20 @@ export const userApi = api.injectEndpoints({
         url: getApiUrl.getMe(),
         method: 'PATCH',
         body: formData
-      })
+      }),
+      invalidatesTags: ['User']
     }),
     updateCover: builder.mutation<void, string | null>({
       query: (cover) => ({
         url: getApiUrl.updateCover(),
         method: 'PATCH',
         body: { cover }
-      })
+      }),
+      invalidatesTags: ['User']
     }),
     getUser: builder.query<GetUserResponse, GetUserRequest>({
       query: ({ userId, ...options }) => getApiUrl.getUser(userId, options),
-      providesTags: ['Post', 'Friend']
+      providesTags: ['Post', 'Friend', 'User']
     }),
     getFriendsPostList: builder.query<GetFriendsPostListResponse, PaginationOptions>({
       query: (options) => getApiUrl.getFriendsPostList(options),

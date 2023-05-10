@@ -1,5 +1,5 @@
 import { Icon28EditOutline, Icon20PictureOutline, Icon20DeleteOutline } from '@vkontakte/icons';
-import { Button, Div } from '@vkontakte/vkui';
+import { Button, Div, Spinner } from '@vkontakte/vkui';
 import { Popover } from '@vkontakte/vkui/dist/components/Popover/Popover';
 import { useCallback, useRef } from 'react';
 
@@ -10,14 +10,13 @@ import styles from './ChangeCoverBlock.module.scss';
 
 interface ChangeCoverBlockProps {
   cover: string | null;
-  setCover: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
-const ChangeCoverBlock: React.FC<ChangeCoverBlockProps> = ({ cover, setCover }) => {
+const ChangeCoverBlock: React.FC<ChangeCoverBlockProps> = ({ cover }) => {
   const filePicker = useRef<HTMLInputElement | null>(null);
 
-  const [uploadFile] = useUploadFileMutation();
-  const [updateCover] = useUpdateCoverMutation();
+  const [uploadFile, { isLoading: uploadFileLoading }] = useUploadFileMutation();
+  const [updateCover, { isLoading: updateCoverLoading }] = useUpdateCoverMutation();
 
   const handleUpload = useCallback(() => {
     if (!filePicker?.current?.files) return;
@@ -28,14 +27,15 @@ const ChangeCoverBlock: React.FC<ChangeCoverBlockProps> = ({ cover, setCover }) 
     uploadFile(formData)
       .unwrap()
       .then(({ file }) => {
-        setCover(file.url);
         updateCover(file.url);
       });
-  }, [setCover, filePicker, uploadFile, updateCover]);
+  }, [filePicker, uploadFile, updateCover]);
 
   const handlePick = () => {
     filePicker.current?.click();
   };
+
+  if (uploadFileLoading || updateCoverLoading) return <Spinner size='regular' />;
 
   return (
     <>
@@ -62,11 +62,7 @@ const ChangeCoverBlock: React.FC<ChangeCoverBlockProps> = ({ cover, setCover }) 
               disabled={!cover}
               mode='tertiary'
               size='m'
-              onClick={() => {
-                updateCover(null)
-                  .unwrap()
-                  .then(() => setCover(null));
-              }}
+              onClick={() => updateCover(null)}
             >
               Удалить
             </Button>
