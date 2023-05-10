@@ -1,5 +1,5 @@
 import { Icon12Verified, Icon28User } from '@vkontakte/icons';
-import { Avatar, Group, Header, Spacing } from '@vkontakte/vkui';
+import { Avatar, Group, Header, PanelSpinner, Spacing } from '@vkontakte/vkui';
 
 import FollowButton from '@/components/FollowButton/FollowButton';
 import UserCell from '@/components/UserCell/UserCell';
@@ -13,14 +13,14 @@ import styles from './FriendListBlock.module.scss';
 const FriendListBlock = () => {
   const { data, isLoading } = useGetFriendListQuery();
 
-  if (isLoading) return null;
+  if (isLoading) return <PanelSpinner height={380} size='medium' />;
 
   if (!data) return <NotFoundPlaceholder />;
 
   return (
     <Group separator='hide'>
       <Header mode='primary' size='large'>
-        Список друзей
+        Список подписок
       </Header>
       <div className={styles.list}>
         {data?.map((friend) => (

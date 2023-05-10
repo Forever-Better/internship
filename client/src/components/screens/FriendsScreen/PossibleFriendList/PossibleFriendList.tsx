@@ -16,7 +16,7 @@ const PossibleFriendList = () => {
   return (
     <Group separator='hide'>
       <Header mode='primary' size='large'>
-        Возможные друзья
+        Можете подписаться
       </Header>
       {data?.map((friend) => (
         <UserCell

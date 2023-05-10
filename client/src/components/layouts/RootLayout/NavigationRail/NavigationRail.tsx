@@ -40,7 +40,7 @@ const NavigationRail = () => {
           <Link to={getPublicUrl.friends()}>
             <NavigationRailItem>
               <Icon24UsersOutline />
-              Друзья
+              Подписки
             </NavigationRailItem>
           </Link>
         </li>

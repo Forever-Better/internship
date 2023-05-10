@@ -1,4 +1,4 @@
-import { Spacing } from '@vkontakte/vkui';
+import { PanelSpinner, Spacing } from '@vkontakte/vkui';
 import clsx from 'clsx';
 import { useParams } from 'react-router-dom';
 
@@ -21,9 +21,11 @@ const ProfileScreen = () => {
     { skip: !userId, refetchOnMountOrArgChange: true }
   );
 
-  if (isLoading) return null;
+  if (isLoading) return <PanelSpinner height={620} size='large' />;
 
-  if (!data || error) return <NotFoundPlaceholder />;
+  if (!data) return null;
+
+  if (error) return <NotFoundPlaceholder />;
 
   const isOwner = owner?.id === data.user.id;
 

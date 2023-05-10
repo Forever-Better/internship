@@ -10,8 +10,8 @@ interface FollowButtonProps {
 }
 
 const FollowButton: React.FC<FollowButtonProps> = ({ hasSubscription, icon, userId }) => {
-  const [follow] = useFollowMutation();
-  const [unFollow] = useUnfollowMutation();
+  const [follow, { isLoading: followLoading }] = useFollowMutation();
+  const [unFollow, { isLoading: unFollowLoading }] = useUnfollowMutation();
 
   const handleOnClick = () => {
     if (hasSubscription) {
@@ -30,9 +30,15 @@ const FollowButton: React.FC<FollowButtonProps> = ({ hasSubscription, icon, user
   }
 
   return hasSubscription ? (
-    <Button before={<Icon24UserAddedOutline />} mode='secondary' onClick={handleOnClick} />
+    <Button
+      before={<Icon24UserAddedOutline />}
+      disabled={unFollowLoading}
+      loading={unFollowLoading}
+      mode='secondary'
+      onClick={handleOnClick}
+    />
   ) : (
-    <Button appearance='neutral' size='l' onClick={handleOnClick}>
+    <Button appearance='neutral' disabled={followLoading} loading={followLoading} size='l' onClick={handleOnClick}>
       Подписаться
     </Button>
   );

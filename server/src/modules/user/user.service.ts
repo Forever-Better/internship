@@ -35,7 +35,8 @@ export class UserService {
     if (!user) throw new NotFoundException('Пользователь не найден');
 
     // формируем список друзей т.к. имеем косяк (нужно изменить систему друзей)
-    const friends = [...user.following.map((item) => item.followingTo), ...user.followers.map((item) => item.user)];
+    const friends = [...user.following.map((item) => item.followingTo)];
+    const followers = [...user.followers.map((item) => item.user)];
 
     // посты пользователя с пагинацией
     const paginatePosts = await this.postService.findManyWithPagination(id, options);
@@ -66,7 +67,7 @@ export class UserService {
 
     // формируем объект просматривающего, чтобы понимать - имеется ли пользователь в друзьях
     const viewer = {
-      isFriend: !!friends.find((user) => user.id === viewerId),
+      isFriend: !!followers.find((user) => user.id === viewerId),
     };
 
     return { ...user, friends, posts, viewer };
@@ -103,21 +104,16 @@ export class UserService {
 
   async findFriendsPostList(userId: number, paginationOptions: PaginationOptions): Promise<Post[]> {
     // получаем информацию о пользователе, который сделал запрос
-    const { followers, following } = await this.repository.findOne({
+    const user = await this.repository.findOne({
       where: { id: userId },
-      relations: [
-        'followers.user.posts.likes.user',
-        'following.followingTo.posts.likes.user',
-        'followers.user.posts.user',
-        'following.followingTo.posts.user',
-      ],
+      relations: ['following.followingTo.posts.likes.user', 'following.followingTo.posts.user'],
     });
 
     // формируем список друзей т.к. имеем косяк (нужно изменить систему друзей)
-    const friends = [...following?.map((item) => item.followingTo), ...followers?.map((item) => item.user)];
+    const followings = [...user.following?.map((item) => item.followingTo)];
 
     // собираем массив постов друзей с сортировкой и последующей пагинацией
-    const friendPosts = friends
+    const friendPosts = followings
       ?.map((friend) => friend.posts)
       .flat(1)
       .sort((a, b) => b.id - a.id)
@@ -151,13 +147,13 @@ export class UserService {
   }
 
   async findFriends(userId: number): Promise<User[]> {
-    const { following, followers } = await this.repository.findOne({
+    const { following } = await this.repository.findOne({
       where: { id: userId },
-      relations: ['followers.user', 'following.followingTo'],
+      relations: ['following.followingTo'],
     });
 
     // формируем список друзей т.к. имеем косяк (нужно изменить систему друзей)
-    const friends = [...following?.map((item) => item.followingTo), ...followers?.map((item) => item.user)];
+    const friends = [...following?.map((item) => item.followingTo)];
 
     return friends;
   }
@@ -165,13 +161,13 @@ export class UserService {
   async findPossibleFriends(userId: number): Promise<User[]> {
     const tenUsers = await this.repository.find({ where: { id: Not(userId) } });
 
-    const { following, followers } = await this.repository.findOne({
+    const { following } = await this.repository.findOne({
       where: { id: userId },
-      relations: ['followers.user', 'following.followingTo'],
+      relations: ['following.followingTo'],
     });
 
     // формируем список друзей т.к. имеем косяк (нужно изменить систему друзей)
-    const friends = [...following?.map((item) => item.followingTo), ...followers?.map((item) => item.user)];
+    const friends = [...following?.map((item) => item.followingTo)];
 
     const filterUsers = tenUsers.filter((user) => !friends.map((friend) => friend.id).includes(user.id));
 

@@ -50,7 +50,7 @@ const SecondStep: React.FC<{ setStep: React.Dispatch<React.SetStateAction<number
         </Button>
       </form>
       <Spacing size={12}>
-        <Separator />
+        <Separator wide />
       </Spacing>
       <Button appearance='neutral' className='auth-form-create-button' size='l' onClick={() => setStep(1)}>
         <div className='auth-form-create-button-label'>

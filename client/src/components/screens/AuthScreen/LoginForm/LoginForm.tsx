@@ -40,7 +40,7 @@ const LoginForm = () => {
         </Button>
       </form>
       <Spacing size={12}>
-        <Separator />
+        <Separator wide />
       </Spacing>
       <Button
         appearance='positive'

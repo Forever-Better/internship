@@ -36,3 +36,4 @@ lerna-debug.log*
 
 # Media files
 /media
+.vercel

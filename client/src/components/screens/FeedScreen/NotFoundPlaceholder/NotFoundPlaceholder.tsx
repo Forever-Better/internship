@@ -4,7 +4,7 @@ import { Group, Placeholder } from '@vkontakte/vkui';
 const NotFoundPlaceholder = () => (
   <Group>
     <Placeholder header='Мы не нашли ничего для вас' icon={<Icon56UserSquareOnSquareOutline />}>
-      Добавьте новых друзей, чтобы здесь появился контент
+      Оформляйте подписки на пользователей, чтобы здесь появился контент
     </Placeholder>
   </Group>
 );
