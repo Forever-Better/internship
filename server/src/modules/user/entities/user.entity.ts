@@ -23,13 +23,16 @@ export class User {
   @Column({ nullable: true })
   image: string;
 
-  @Column({ default: 23 })
+  @Column({ nullable: true })
+  status: string;
+
+  @Column({ nullable: true })
   age: number;
 
-  @Column({ default: 'Velikiy Novgorod' })
+  @Column({ nullable: true })
   city: string;
 
-  @Column({ default: 'University of Yaroslav the Wise' })
+  @Column({ nullable: true })
   university: string;
 
   @CreateDateColumn({
@@ -58,4 +61,7 @@ export class User {
 
   @OneToMany(() => Like, (likes) => likes.user)
   likes: Like[];
+
+  @Column({ nullable: true })
+  cover: string;
 }

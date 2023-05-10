@@ -2,10 +2,6 @@
 
 .root {
   .container {
-    display: grid;
-    grid-template-columns: 6fr 4fr;
-    gap: 16px;
-    overflow: hidden;
     @include breakpoint-down(md) {
       grid-template-columns: auto;
 

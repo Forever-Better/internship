@@ -5,6 +5,7 @@ export enum UrlTemplates {
   Profile = '/users/:userId',
   Friends = '/friends',
   Dialogues = '/dialogues',
+  Settings = '/settings',
   Login = '/',
   Signup = '/signup'
 }

@@ -7,7 +7,13 @@
   height: 360px;
 
   .top {
-    background-color: var(--md-sys-color-tertiary);
+    display: flex;
+    justify-content: flex-end;
+    align-items: start;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-color: var(--vkui--color_accent_raspberry_pink);
+    filter: grayscale(0.1);
     margin: -23px -25px;
     border-radius: 12px 12px 0 0;
   }
@@ -28,6 +34,10 @@
         flex-direction: column;
         align-items: center;
         text-align: center;
+      }
+
+      .avatar {
+        border: 6px solid var(--vkui--color_header_background);
       }
 
       .info {

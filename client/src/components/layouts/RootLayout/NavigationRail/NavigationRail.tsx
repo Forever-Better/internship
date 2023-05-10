@@ -2,8 +2,10 @@ import {
   Icon24UserCircleOutline,
   Icon24NewsfeedOutline,
   Icon24MessageOutline,
-  Icon24UsersOutline
+  Icon24UsersOutline,
+  Icon28SettingsOutline
 } from '@vkontakte/icons';
+import { Separator, Spacing } from '@vkontakte/vkui';
 import { Link } from 'react-router-dom';
 
 import { getPublicUrl } from '@/helpers/getPublicUrl';
@@ -47,6 +49,17 @@ const NavigationRail = () => {
             <NavigationRailItem>
               <Icon24MessageOutline />
               Диалоги
+            </NavigationRailItem>
+          </Link>
+        </li>
+        <Spacing size={12}>
+          <Separator wide />
+        </Spacing>
+        <li>
+          <Link to={getPublicUrl.settings()}>
+            <NavigationRailItem>
+              <Icon28SettingsOutline height={24} width={24} />
+              Настройки
             </NavigationRailItem>
           </Link>
         </li>

@@ -50,15 +50,21 @@ const UserInfoModal: React.FC<UserInfoModalProps> = ({ activeModal, closeModal, 
         <Separator style={{ marginBottom: 12 }} />
 
         <MiniInfoCell before={<Icon20ArticleOutline />} textWrap='full'>
-          Хочу работать ВКонтакте.
+          {info?.status}
         </MiniInfoCell>
-        <MiniInfoCell before={<Icon20MentionOutline />}>React team</MiniInfoCell>
+        <MiniInfoCell before={<Icon20MentionOutline />}>React Team</MiniInfoCell>
         <Separator style={{ marginTop: 12, marginBottom: 12 }} />
         <MiniInfoCell before={<Icon20DiamondOutline />}>
-          {info.age} {plural(info.age, ['год', 'года', 'лет', 'лет'])}
+          {info.age ? (
+            <>
+              {info.age} {plural(info.age, ['год', 'года', 'лет', 'лет'])}
+            </>
+          ) : (
+            'Не указан'
+          )}
         </MiniInfoCell>
-        <MiniInfoCell before={<Icon20PlaceOutline />}>{info.city}</MiniInfoCell>
-        <MiniInfoCell before={<Icon20EducationOutline />}>{info.university}</MiniInfoCell>
+        <MiniInfoCell before={<Icon20PlaceOutline />}>{info.city ?? 'Не указан'}</MiniInfoCell>
+        <MiniInfoCell before={<Icon20EducationOutline />}>{info.university ?? 'Не указан'}</MiniInfoCell>
         <div style={{ height: 24 }} />
       </ModalPage>
     </ModalRoot>

@@ -9,7 +9,12 @@ export enum ThemeMode {
   DARK = 'dark'
 }
 
-// export enum PostItemMode: {
-//   OWNER: 'owner',
-
-// }
+export enum ProfileForm {
+  IMAGE = 'image',
+  STATUS = 'status',
+  FIRSTNAME = 'firstName',
+  LASTNAME = 'lastName',
+  AGE = 'age',
+  CITY = 'city',
+  UNIVERSITY = 'university'
+}

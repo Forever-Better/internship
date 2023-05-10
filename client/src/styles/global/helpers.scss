@@ -1,8 +1,19 @@
+@use '../util' as *;
+
 .container {
-  max-width: 1240px;
+  max-width: 1160px;
   width: 100%;
   margin: 0 auto;
   padding: 0 16px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 5fr 3fr;
+  gap: 16px;
+  @include breakpoint-down(md) {
+    grid-template-columns: auto;
+  }
 }
 
 .block {

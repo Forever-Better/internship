@@ -1,7 +1,7 @@
 {
   "name": "client",
-  "homepage": "https://Forever-Better.github.io/internship",
   "private": true,
+  "homepage": "https://Forever-Better.github.io/internship",
   "version": "0.0.0",
   "type": "module",
   "scripts": {

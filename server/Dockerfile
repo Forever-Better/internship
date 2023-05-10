@@ -1,5 +1,5 @@
 FROM node:18.15.0-alpine
-WORKDIR /usr/src/server
+WORKDIR /usr/src/api
 RUN yarn global add @nestjs/cli typescript ts-node
 COPY package.json .
 RUN yarn install --production

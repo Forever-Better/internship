@@ -15,6 +15,7 @@ import FeedScreen from './components/screens/FeedScreen/FeedScreen.tsx';
 import FriendsScreen from './components/screens/FriendsScreen/FriendsScreen.tsx';
 import MessengerScreen from './components/screens/MessengerScreen/MessengerScreen.tsx';
 import ProfileScreen from './components/screens/ProfileScreen/ProfileScreen.tsx';
+import SettingsScreen from './components/screens/SettingsScreen/SettingsScreen.tsx';
 import { UrlTemplates } from './lib/urlBuilder.ts';
 import { store } from './store/store.ts';
 
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
         <Route element={<FriendsScreen />} path={UrlTemplates.Friends} />
         <Route element={<ProfileScreen />} path={UrlTemplates.Profile} />
         <Route element={<MessengerScreen />} path={UrlTemplates.Dialogues} />
+        <Route element={<SettingsScreen />} path={UrlTemplates.Settings} />
       </Route>
       <Route element={<AuthLayout />} path={UrlTemplates.Login}>
         <Route index element={<LoginForm />} />

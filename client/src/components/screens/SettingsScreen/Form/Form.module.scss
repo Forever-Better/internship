@@ -1,0 +1,20 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 560px;
+
+  .positiveStatus {
+    color: var(--vkui--color_accent_green);
+
+    .content {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    > ::before {
+      background-color: #def0d3;
+    }
+  }
+}

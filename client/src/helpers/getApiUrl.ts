@@ -13,6 +13,12 @@ export const getApiUrl = {
   refresh() {
     return ApiUrlTemplates.Refresh;
   },
+  getMe() {
+    return `${ApiUrlTemplates.Users}/me`;
+  },
+  updateCover() {
+    return `${ApiUrlTemplates.Users}/me/cover`;
+  },
   getUser(userId: number, options: PaginationOptions) {
     return `${ApiUrlTemplates.Users}/${userId}?${PAGINATION(options)}`;
   },

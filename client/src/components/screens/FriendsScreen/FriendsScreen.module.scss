@@ -3,12 +3,6 @@
 .root {
   .content {
     position: relative;
-    display: grid;
-    grid-template-columns: 5fr 3fr;
-    gap: 16px;
-    @include breakpoint-down(md) {
-      grid-template-columns: auto;
-    }
 
     .fixed {
       position: sticky;

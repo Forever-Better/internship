@@ -9,6 +9,7 @@ import UserInfoModal from '@/components/UserInfoModal/UserInfoModal';
 import { getPublicUrl } from '@/helpers/getPublicUrl';
 import type { User } from '@/types/user.interface';
 
+import ChangeCoverBlock from './ChangeCoverBlock/ChangeCoverBlock';
 import styles from './HeaderBlock.module.scss';
 
 interface HeaderBlockProps {
@@ -20,15 +21,24 @@ interface HeaderBlockProps {
 const HeaderBlock: React.FC<HeaderBlockProps> = ({ info, isOwner, isSubscribe }) => {
   const navigate = useNavigate();
   const [activeModal, setActiveModal] = useState('');
+  const [cover, setCover] = useState<string | null>(info.cover);
 
   return (
     <section>
       <Group separator='hide'>
         <div className={clsx(styles.root, 'block-fluid')}>
-          <div className={styles.top} />
+          <div className={styles.top} style={{ backgroundImage: `url(${cover})` }}>
+            {isOwner && <ChangeCoverBlock cover={cover} setCover={setCover} />}
+          </div>
           <div className={styles.bottom}>
             <div className={styles.userContainer}>
-              <Avatar withBorder fallbackIcon={<Icon28User height={64} width={64} />} size={144} src={info.image} />
+              <Avatar
+                withBorder
+                className={styles.avatar}
+                fallbackIcon={<Icon28User height={64} width={64} />}
+                size={144}
+                src={info.image}
+              />
               <div className={styles.info}>
                 <h1>
                   {info.firstName}
@@ -36,10 +46,12 @@ const HeaderBlock: React.FC<HeaderBlockProps> = ({ info, isOwner, isSubscribe })
                   {info.lastName}
                 </h1>
                 <div className={styles.other}>
-                  <span>
-                    <Icon24PlaceOutline />
-                    Novgorod
-                  </span>
+                  {info.city && (
+                    <span>
+                      <Icon24PlaceOutline />
+                      {info.city}
+                    </span>
+                  )}
                   <button onClick={() => setActiveModal('extended_info')}>
                     <Icon24InfoCircleOutline />
                     Подробнее

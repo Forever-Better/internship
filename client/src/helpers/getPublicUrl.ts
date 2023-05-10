@@ -18,5 +18,8 @@ export const getPublicUrl = {
   },
   dialogues() {
     return UrlTemplates.Dialogues;
+  },
+  settings() {
+    return UrlTemplates.Settings;
   }
 };

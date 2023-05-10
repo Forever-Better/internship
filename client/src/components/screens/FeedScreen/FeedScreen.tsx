@@ -6,7 +6,9 @@ import PostListBlock from './PostListBlock/PostListBlock';
 const FeedScreen = () => (
   <div className={styles.root}>
     <Spacing size={16} />
-    <PostListBlock />
+    <div className='layout'>
+      <PostListBlock />
+    </div>
   </div>
 );
 

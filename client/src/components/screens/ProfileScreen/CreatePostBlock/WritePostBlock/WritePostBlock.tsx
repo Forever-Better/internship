@@ -1,5 +1,5 @@
 import { Icon16User, Icon20Cancel } from '@vkontakte/icons';
-import { Avatar, Button, Group, Spacing, Textarea } from '@vkontakte/vkui';
+import { Avatar, Button, Group, IconButton, Spacing, Textarea } from '@vkontakte/vkui';
 import clsx from 'clsx';
 import { useRef, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
@@ -61,9 +61,9 @@ const WritePostBlock: React.FC<WritePostBlockProps> = ({ activeWriteBlock, setAc
             {image && (
               <>
                 <img alt='Фотография' className={styles.image} src={image} />
-                <button className={styles.deleteButton} onClick={handleDelete}>
-                  <Icon20Cancel />
-                </button>
+                <IconButton className={styles.deleteButton} onClick={handleDelete}>
+                  <Icon20Cancel color='var(--vkui--color_icon_contrast)' />
+                </IconButton>
               </>
             )}
           </div>

@@ -49,7 +49,7 @@ const UploadImageBlock: React.FC<UploadImageBlockProps> = ({ image, setImage }) 
         {...rest}
       />
 
-      <IconButton className='text-on-surface-variant' disabled={!!image} hasHover={false} onClick={handlePick}>
+      <IconButton disabled={!!image} onClick={handlePick}>
         <Icon24PicturePlusOutline />
       </IconButton>
     </>

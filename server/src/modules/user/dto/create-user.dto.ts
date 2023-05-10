@@ -1,4 +1,4 @@
-import { IsEmail, IsNotEmpty, IsOptional, Length } from 'class-validator';
+import { IsEmail, IsNotEmpty, Length } from 'class-validator';
 
 export class CreateUserDto {
   @IsNotEmpty({ message: 'Почтовый адрес обязательное поле.' })
@@ -15,8 +15,4 @@ export class CreateUserDto {
 
   @Length(3, 22, { message: 'Длина фамилии от 3 до 22 символов.' })
   lastName?: string;
-
-  @IsOptional()
-  @IsNotEmpty()
-  image?: string;
 }

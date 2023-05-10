@@ -48,6 +48,24 @@ export class UserController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Patch('me/cover')
+  updateCover(@Request() req, @Body() body: { cover: string | null }) {
+    return this.userService.updateCover(req.user.id, body.cover);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('me')
+  me(@Request() req) {
+    return this.userService.findOne({ id: req.user.id });
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Patch('me')
+  update(@Request() req, @Body() updateUserDto: UpdateUserDto) {
+    return this.userService.update(req.user.id, updateUserDto);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Get(':id')
   async findOne(
     @Request() req,
@@ -67,11 +85,5 @@ export class UserController {
     const posts = infinityPagination(otherData.posts, { page, limit });
 
     return { user: otherData, posts, viewer };
-  }
-
-  @UseGuards(JwtAuthGuard)
-  @Patch('me')
-  update(@Request() req, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(req.user.id, updateUserDto);
   }
 }

@@ -49,8 +49,8 @@ export class UserService {
     // фильтруем лайки проматривающего на отношение к пользователю. получаем =>
     // посты, оценные промастривающим на странице пользователя
     const likedPosts = likes
-      .filter((like) => like.post.user?.id === user?.id)
-      .map((like) => ({ ...like.post, likesCount: like.post.likes?.length, isLike: true }));
+      .filter((like) => like?.post?.user?.id === user?.id)
+      .map((like) => ({ ...like?.post, likesCount: like?.post?.likes?.length, isLike: true }));
 
     // новый массив для последующего формирования
     const posts = [];
@@ -91,12 +91,22 @@ export class UserService {
     });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return this.repository.update(id, updateUserDto);
+  update(id: number, dto: UpdateUserDto) {
+    return this.repository.update(id, {
+      image: dto.image,
+      status: dto.status,
+      firstName: dto.firstName,
+      lastName: dto.lastName,
+      university: dto.university,
+      age: dto.age,
+      city: dto.city,
+    });
   }
 
-  updateProfile(id: number, updateUserDto: UpdateUserDto) {
-    return this.repository.save({ id, ...updateUserDto });
+  updateCover(id: number, cover: string) {
+    return this.repository.update(id, {
+      cover,
+    });
   }
 
   softDelete(id: number) {
